@@ -1,17 +1,18 @@
-import base64
-import os.path
-import pickle
-import json
+from simplegmail import Gmail
+from simplegmail.query import construct_query
 
-def authenticate_gmail():
-    return
+gmail = Gmail()
 
-def create_gmail_cred():
-    return
+query_params = {
+    "newer_than": (1, "week"),
+    "older_than": (1, "day")
+}
 
-def read_emails():
-    return
+# messages = gmail.get_unread_inbox(query = construct_query(query_params))
+messages = gmail.get_unread_inbox()
 
-
-if __name__ == "__main__":
-    read_emails()
+for message in messages:
+    print("From: " + message.sender)
+    print("Subject: " + message.subject)
+    print("Data: " + message.date)
+    print("Preview: " + message.snippet)
