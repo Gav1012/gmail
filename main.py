@@ -4,12 +4,13 @@ from simplegmail.query import construct_query
 gmail = Gmail()
 
 query_params = {
-    "newer_than": (1, "week"),
-    "older_than": (1, "day")
+    "newer_than": (5, "day"),
+    # "older_than": (1, "hour"),
+    "unread": True,
+    "sender": [["jobs-noreply@linkedin.com"], ["jobs-listings@linkedin.com"]]
 }
 
-# messages = gmail.get_unread_inbox(query = construct_query(query_params))
-messages = gmail.get_unread_inbox()
+messages = gmail.get_messages(query = construct_query(query_params))
 
 for message in messages:
     print("From: " + message.sender)
